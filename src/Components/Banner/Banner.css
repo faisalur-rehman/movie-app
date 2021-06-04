@@ -1,7 +1,18 @@
 .centreImage {
-    display: block;
-    margin-right: 30%;
-  
-    
-    height: 50%
-  }
+  display: block;
+  margin-right: 30%;
+
+  height: 50%;
+}
+.carousel {
+  height: 90%;
+}
+.carousel-image-col {
+  width: 100%;
+  margin: auto;
+  height: fit-content;
+}
+.img-col:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

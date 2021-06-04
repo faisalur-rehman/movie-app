@@ -1,0 +1,16 @@
+.movie:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.link-color {
+  color: white !important;
+}
+.link-color:hover {
+  text-decoration: none;
+}
+.runtime {
+  color: #c82333;
+}
+.runtime span {
+  color: white;
+}

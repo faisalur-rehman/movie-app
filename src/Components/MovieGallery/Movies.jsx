@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import axios from "axios";
 import { Carousel, Image, Row, Col, Button, Container } from "react-bootstrap";
 import MovieList from "./MovieList";
+
+export const MovieContext = createContext();
 
 const Movies = (props) => {
   // const [movies, setMovies] = useState([]);
@@ -13,6 +15,7 @@ const Movies = (props) => {
   const [currentIsLoaded, setCurrentIsLoaded] = useState(false);
   const [futureIsLoaded, setFutureIsLoaded] = useState(false);
   const [err, setError] = useState({});
+  const [movies, setAllMovies] = useState([]);
 
   useEffect(() => {
     const MOVIES_API_URL = "http://www.omdbapi.com/?apikey=1fac6c28&";
@@ -67,6 +70,9 @@ const Movies = (props) => {
         setFutureIsLoaded(true);
         setError(err);
       });
+    if (currentMovies && upcomingMovies) {
+      setAllMovies([...currentMovies, ...upcomingMovies]);
+    }
   }, []);
 
   const handleDisplayCurrent = () => {
@@ -83,18 +89,25 @@ const Movies = (props) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleDisplayCurrent}>
+      <Button className="m-3" variant="danger" onClick={handleDisplayCurrent}>
         {" "}
         Whats on{" "}
       </Button>
-      <Button variant="secondary" onClick={handleDisplayUpcoming}>
+      <Button
+        variant="warning"
+        onClick={handleDisplayUpcoming}
+        style={{ color: "white" }}
+      >
         Coming Soon
       </Button>
 
       <h1>Book Now</h1>
-      <MovieList
-        movies={displayUpcoming ? upcomingMovies : currentMovies}
-      ></MovieList>
+      <MovieContext.Provider value={[movies]}>
+        <MovieList
+          movies={displayUpcoming ? upcomingMovies : currentMovies}
+          upComing={displayUpcoming}
+        ></MovieList>
+      </MovieContext.Provider>
     </>
   );
 };

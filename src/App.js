@@ -7,6 +7,8 @@ import Footer from "./Components/Footer/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import MovieInfo from "./Components/MovieGallery/MovieInfo";
+import MovieUp from "./Components/MovieGallery/MovieUp";
 
 function App() {
   return (
@@ -21,6 +23,13 @@ function App() {
         <Route exact path="/ContactUs" component={ContactUs} />
 
         <Route exact path="/movies" component={Movies}></Route>
+        <Route exact path="/movies/:id">
+          <MovieInfo />
+        </Route>
+        <Route exact path="/movies/info/:id">
+          {/* <MovieInfo /> */}
+          <MovieUp />
+        </Route>
 
         <Route exact path="/about">
           <AboutPage />
